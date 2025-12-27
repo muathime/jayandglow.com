@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jay & Glow Spa | Appointment</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins: wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           GLOBAL STYLES & RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('images/nails2.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px 10px;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           CONTAINER & LAYOUT
+           ============================================ */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, #e97cae 0%, #ffb8d4 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           WORKING HOURS BOX
+           ============================================ */
+        .hours-box {
+            background: #fff8fc;
+            border: 2px solid #ffd4e5;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .hours-box h2 {
+            font-size: 1.2rem;
+            color: #d63384;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .hours-box .schedule {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .hours-box .schedule strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .hours-box .note {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ============================================
+           FORM STYLES
+           ============================================ */
+        .form-section {
+            padding: 30px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        label .required {
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #f0e6ed;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ff9ec5;
+            box-shadow: 0 0 0 3px rgba(255, 158, 197, 0.1);
+            background: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .price-info {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* ============================================
+           SUBMIT BUTTON
+           ============================================ */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff9ec5 0%, #d63384 100%);
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.3);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* ============================================
+           MESSAGES
+           ============================================ */
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+            display: none;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #d63384;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer .contact {
+            margin-bottom: 8px;
+        }
+
+        .footer .location {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* ============================================
+           RESPONSIVE TWEAKS
+           ============================================ */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hours-box {
+                margin: 15px;
+                padding: 15px;
+            }
+
+            .form-section {
+                padding: 20px 15px;
+            }
+        }
+
+        /* ============================================
+           LOADING SPINNER (optional)
+           ============================================ */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1><img src="images/jay&glow_logo.png" alt="Jay&Glow Nails & Spa" style="height: 40%; max-width: 100%; object-fit: contain; margin-bottom: -150px;"></h1>
+            <p style="margin-top: 5px; font-size: 1.2rem;"><b>Book Your Appointment</b></p>
+        </div>
+
+        <!-- WORKING HOURS -->
+        <div class="hours-box">
+            <div class="location">
+                Located in the heart of Gachie, Njakai Stage, - just off Redhill Road
+            </div>
+            <div class="contact">
+                📞 Call/WhatsApp: <a href="tel:+254712345678">+254 712 345 678</a>
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="https://maps.app.goo.gl/fG18J1XhnRAzkysX6" target="_blank">📍 Location Pin on Google Maps</a>
+            </div>
+        </div>
+
+        <!-- SUCCESS/ERROR MESSAGES -->
+        <div id="messageBox" class="message"></div>
+
+        <!-- BOOKING FORM -->
+        <form id="bookingForm" class="form-section">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g.  Jane Wanjiku" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+254712345678 or 0712345678"
+                    required>
+            </div>
+
+            <!-- Appointment Date -->
+            <div class="form-group">
+                <label for="appointmentDate">Appointment Date <span class="required">*</span></label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+            </div>
+
+            <!-- Appointment Time -->
+            <div class="form-group">
+                <label for="appointmentTime">Appointment Time <span class="required">*</span></label>
+                <select id="appointmentTime" name="appointmentTime" required>
+                    <option value="">-- Select a date first --</option>
+                </select>
+            </div>
+
+            <!-- Service Category -->
+            <div class="form-group">
+                <label for="serviceCategory">Service Category <span class="required">*</span></label>
+                <select id="serviceCategory" name="serviceCategory" required>
+                    <option value="">-- Select Service --</option>
+                    <option value="Manicure">Manicure</option>
+                    <option value="Pedicure">Pedicure</option>
+                    <option value="Makeup">Makeup</option>
+                </select>
+            </div>
+
+            <!-- Sub-service -->
+            <div class="form-group">
+                <label for="subService">Sub-service <span class="required">*</span></label>
+                <select id="subService" name="subService" required disabled>
+                    <option value="">-- Select category first --</option>
+                </select>
+                <div id="priceInfo" class="price-info"></div>
+            </div>
+
+            <!-- Additional Notes -->
+            <div class="form-group">
+                <label for="notes">Additional Notes / Special Requests</label>
+                <textarea id="notes" name="notes"
+                    placeholder="Any special requests or allergies?  (optional)"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit" id="submitBtn">
+                Book Appointment
+            </button>
+        </form>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <h2>⏰ Working Hours</h2>
+            <div class="schedule">
+                <strong>Monday – Saturday:</strong> 8:00 AM – 7:00 PM<br>
+                <strong>Sundays & Public Holidays:</strong> 9:00 AM – 6:00 PM
+            </div>
+            <div class="note">
+                <i>Our spa offers hot beverages or wine, available throughout the week, to all our customers.</i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // SERVICE DATA WITH PRICES (Kenyan Context)
+        // ============================================
+        const services = {
+            Manicure: [
+                { name: "Classic Manicure", price: "KES 1,000–1,500" },
+                { name: "Gel Polish Manicure", price: "KES 1,500–2,500" },
+                { name: "Acrylic Nails Full Set", price: "KES 2,500–4,000" },
+                { name: "Nail Overlay", price: "KES 2,000–3,500" },
+                { name: "Nail Art / Design (add-on)", price: "KES 500–2,000" },
+                { name: "Tips / Stick-ons", price: "KES 800–1,500" },
+                { name: "Regular Polish Only", price: "KES 500–1,000" }
+            ],
+            Pedicure: [
+                { name: "Classic Pedicure", price: "KES 1,200–2,000" },
+                { name: "Spa Pedicure (scrub + massage)", price: "KES 2,000–3,000" },
+                { name: "Gel Polish Pedicure", price: "KES 2,000–3,000" },
+                { name: "Callus Removal + Pedicure", price: "KES 2,500+" }
+            ],
+            Makeup: [
+                { name: "Natural / Day Makeup", price: "KES 3,000–5,000" },
+                { name: "Full Glam / Event Makeup", price: "KES 5,000–10,000" },
+                { name: "Bridal Makeup", price: "KES 8,000–15,000" },
+                { name: "Makeup Trial Session", price: "KES 3,000–5,000" }
+            ]
+        };
+
+        // ============================================
+        // DOM ELEMENTS
+        // ============================================
+        const form = document.getElementById('bookingForm');
+        const dateInput = document.getElementById('appointmentDate');
+        const timeSelect = document.getElementById('appointmentTime');
+        const categorySelect = document.getElementById('serviceCategory');
+        const subServiceSelect = document.getElementById('subService');
+        const priceInfo = document.getElementById('priceInfo');
+        const messageBox = document.getElementById('messageBox');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // ============================================
+        // GOOGLE APPS SCRIPT WEB APP URL
+        // REPLACE THIS WITH YOUR DEPLOYED WEB APP URL
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7V_J38U0UhsyOBT2Zta5EqHI25XH_yZ1SFMd43yj0kseEvLqe3wV2H1xGE3skLDWt/exec';
+
+        // ============================================
+        // SET MINIMUM DATE TO TODAY
+        // ============================================
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // ============================================
+        // GENERATE TIME SLOTS BASED ON SELECTED DATE
+        // ============================================
+        dateInput.addEventListener('change', function () {
+            const selectedDate = new Date(this.value + 'T00:00:00'); // Avoid timezone issues
+            const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 1 = Monday, .. ., 6 = Saturday
+
+            // Determine working hours
+            let startHour, endHour;
+            if (dayOfWeek === 0) {
+                // Sunday (and public holidays follow Sunday hours)
+                startHour = 9;
+                endHour = 18;
+            } else {
+                // Monday - Saturday
+                startHour = 8;
+                endHour = 19;
+            }
+
+            // Generate 30-minute intervals
+            timeSelect.innerHTML = '<option value="">-- Select Time --</option>';
+            for (let hour = startHour; hour < endHour; hour++) {
+                for (let min of [0, 30]) {
+                    const timeStr = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeStr;
+                    option.textContent = formatTime12Hour(timeStr);
+                    timeSelect.appendChild(option);
+                }
+            }
+
+            // Add final slot (closing time)
+            const finalTime = `${String(endHour).padStart(2, '0')}:00`;
+            const finalOption = document.createElement('option');
+            finalOption.value = finalTime;
+            finalOption.textContent = formatTime12Hour(finalTime);
+            timeSelect.appendChild(finalOption);
+
+            timeSelect.disabled = false;
+        });
+
+        // ============================================
+        // HELPER:  FORMAT TIME TO 12-HOUR (AM/PM)
+        // ============================================
+        function formatTime12Hour(time24) {
+            const [hour, min] = time24.split(':').map(Number);
+            const period = hour >= 12 ? 'PM' : 'AM';
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${String(min).padStart(2, '0')} ${period}`;
+        }
+
+        // ============================================
+        // UPDATE SUB-SERVICES WHEN CATEGORY CHANGES
+        // ============================================
+        categorySelect.addEventListener('change', function () {
+            const category = this.value;
+            subServiceSelect.innerHTML = '<option value="">-- Select Sub-service --</option>';
+            priceInfo.textContent = '';
+
+            if (category && services[category]) {
+                services[category].forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.name;
+                    option.dataset.price = service.price;
+                    option.textContent = service.name;
+                    subServiceSelect.appendChild(option);
+                });
+                subServiceSelect.disabled = false;
+            } else {
+                subServiceSelect.disabled = true;
+            }
+        });
+
+        // ============================================
+        // SHOW PRICE WHEN SUB-SERVICE IS SELECTED
+        // ============================================
+        subServiceSelect.addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.dataset.price) {
+                priceInfo.textContent = `💰 Price: ${selectedOption.dataset.price}`;
+            } else {
+                priceInfo.textContent = '';
+            }
+        });
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Clear previous messages
+            messageBox.textContent = '';
+            messageBox.className = 'message';
+
+            // Get form data
+            const fullName = document.getElementById('fullName').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            const serviceCategory = document.getElementById('serviceCategory').value;
+            const subService = document.getElementById('subService').value;
+            const notes = document.getElementById('notes').value.trim();
+            const priceRange = subServiceSelect.options[subServiceSelect.selectedIndex].dataset.price || '';
+
+            // Validate phone number (Kenyan format)
+            if (!validateKenyanPhone(phoneNumber)) {
+                showMessage('Please enter a valid Kenyan phone number (e.g., +254712345678 or 0712345678)', 'error');
+                return;
+            }
+
+            // Validate date is in the future
+            const selectedDate = new Date(appointmentDate);
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
+            if (selectedDate < todayDate) {
+                showMessage('Please select a date in the future. ', 'error');
+                return;
+            }
+
+            // Prepare data for Google Sheets
+            const bookingData = {
+                fullName,
+                phoneNumber,
+                appointmentDate,
+                appointmentTime,
+                serviceCategory,
+                subService,
+                priceRange,
+                notes
+            };
+
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...  <span class="spinner"></span>';
+
+            try {
+                // Send to Google Apps Script
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Google Apps Script returns opaque response
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                // Since mode is 'no-cors', we can't read the response
+                // Assume success if no error is thrown
+                showMessage('✅ Booking received!  We will confirm via WhatsApp or SMS shortly.  Asante sana!  🙏', 'success');
+                form.reset();
+                timeSelect.disabled = true;
+                subServiceSelect.disabled = true;
+                priceInfo.textContent = '';
+
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('⚠️ Something went wrong. Please try again or call us directly. ', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book Appointment';
+            }
+        });
+
+        // ============================================
+        // VALIDATE KENYAN PHONE NUMBER
+        // ============================================
+        function validateKenyanPhone(phone) {
+            // Remove spaces and dashes
+            phone = phone.replace(/[\s\-]/g, '');
+
+            // Pattern 1: +254 followed by 9 digits
+            const pattern1 = /^\+254\d{9}$/;
+            // Pattern 2: 0 followed by 9 digits
+            const pattern2 = /^0\d{9}$/;
+
+            return pattern1.test(phone) || pattern2.test(phone);
+        }
+
+        // ============================================
+        // SHOW MESSAGE (SUCCESS OR ERROR)
+        // ============================================
+        function showMessage(text, type) {
+            messageBox.textContent = text;
+            messageBox.className = `message ${type}`;
+            messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Auto-hide success message after 8 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageBox.style.display = 'none';
+                }, 8000);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
